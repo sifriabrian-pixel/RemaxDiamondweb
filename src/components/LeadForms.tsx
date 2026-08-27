@@ -70,6 +70,7 @@ export function LeadForms() {
                 formspreeId={process.env.NEXT_PUBLIC_FORMSPREE_SELLER_ID}
                 whatsappHref={SELLER_WHATSAPP}
                 submitLabel="Quiero vender mi propiedad"
+                whatsappLabel="Quiero vender mi propiedad"
               />
             </div>
           </motion.div>
@@ -106,6 +107,7 @@ export function LeadForms() {
                   formspreeId={process.env.NEXT_PUBLIC_FORMSPREE_RECRUIT_ID}
                   whatsappHref={RECRUIT_WHATSAPP}
                   submitLabel="Quiero postularme"
+                  whatsappLabel="Quiero ser asesor de RE/MAX Diamond"
                   variant="dark"
                 />
               </div>
