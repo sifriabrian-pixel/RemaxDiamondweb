@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -44,9 +45,17 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-5 sm:px-10">
-        <a href="/" className="font-display text-lg font-extrabold tracking-tight text-cream sm:text-xl">
-          <span className="text-red">RE/MAX</span>{" "}
-          <span className="font-medium">Diamond</span>
+        <a href="/" className="flex items-center gap-2">
+          <Image
+            src="/brand/logo-light.png"
+            alt="RE/MAX"
+            width={1112}
+            height={308}
+            sizes="120px"
+            className="h-6 w-auto sm:h-7"
+            priority
+          />
+          <span className="font-display text-lg font-extrabold text-red sm:text-xl">Diamond</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">

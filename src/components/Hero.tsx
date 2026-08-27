@@ -29,14 +29,14 @@ export function Hero() {
       id="top"
       className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-navy pt-28 pb-16 sm:pb-20"
     >
-      {/* Foto real de una propiedad del catálogo (casa con piscina, Crucita, Manabí — RE/MAX
-          Diamond), tomada del sitio oficial remax.com.ec/diamond. No es banco de imágenes: es
-          una propiedad real del inventario. Reemplazar por una foto propia (dron/atardecer)
-          cuando Brian tenga sesión de fotos dedicada; hasta entonces esta es honesta. */}
+      {/* Foto aérea real de Manta al atardecer — Municipio de Manta, Wikimedia Commons,
+          CC BY-SA 4.0 (https://commons.wikimedia.org/wiki/File:Panoramicamantaec.jpg).
+          No es banco de imágenes genérico: es la ciudad real. Reemplazar por una foto
+          propia cuando Brian tenga sesión de fotos dedicada. */}
       <div className="absolute inset-0">
         <Image
-          src="/properties/hero-crucita-pool.jpg"
-          alt="Piscina con vista al mar de una propiedad RE/MAX Diamond en Crucita, Manabí"
+          src="/properties/manta-skyline-sunset.jpg"
+          alt="Vista aérea de Manta, Manabí, al atardecer"
           fill
           priority
           className="object-cover"
@@ -45,8 +45,24 @@ export function Hero() {
       </div>
 
       <p className="absolute right-6 top-24 z-10 text-xs text-cream/70 sm:right-10">
-        Crucita, Manabí — propiedad del catálogo
+        Manta, Manabí — foto: Municipio de Manta (CC BY-SA)
       </p>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="pointer-events-none absolute right-4 top-1/3 z-10 hidden w-36 lg:block lg:w-44 xl:w-52"
+      >
+        <Image
+          src="/brand/diamantito-elegante.png"
+          alt=""
+          width={1080}
+          height={1350}
+          sizes="208px"
+          className="h-auto w-full drop-shadow-[0_18px_28px_rgba(0,0,0,0.45)]"
+        />
+      </motion.div>
 
       <motion.div
         variants={container}

@@ -49,6 +49,13 @@ Identidad visual 100% independiente del template genérico remax.com.ec y de cua
 - Frases de marca ya en uso por el cliente: "Nadie en el mundo vende más bienes raíces que REMAX", "Múdate a la vida que quieres".
 - Fase 0 (exploración visual) ya se corrió y el cliente aprobó una dirección de hero combinada — ver `## Evidence on Hand` y el DESIGN.md que new-work va a generar a partir de esta dirección.
 
+## Evidence on Hand (actualizado 2026-08-27 — logo real, mascota, forms separados)
+
+- **Logo real** (`public/brand/logo-light.png` transparente, cream, para fondos navy; `logo-diamond-dark.png` con texto negro, para fondos claros — bajados de Drive): reemplaza el wordmark de texto en header y footer. "Diamond" sigue siendo texto (rojo, Archivo) al lado del ícono+REMAX, porque el archivo de Drive no trae una versión con "Diamond" ya integrado en el lockup claro.
+- **Diamantito** (`public/brand/diamantito-elegante.png`, mascota 3D): aparece en el hero (esquina derecha, solo desktop `lg:`) y en la card del form de asesores. No se usó como logo/firma/imagen de perfil, respetando la restricción del manual de marca.
+- **Foto de fondo del hero cambiada**: de la piscina de Crucita (foto de listing) a una vista aérea real de Manta al atardecer — foto oficial del Municipio de Manta, Wikimedia Commons, CC BY-SA 4.0 (crédito visible en el hero). Pedido explícito de Brian: "un edificio en Manta... que se vea la costa".
+- **Los 2 forms del home ya no son comprador+vendedor — son vendedor + reclutamiento de asesores** (corrección explícita de Brian sobre el instructivo original de 3 forms): tarjetas visualmente separadas (vendedor: clara, borde navy; asesores: navy invertida, borde rojo, copy con más intención comercial/venta, Diamantito en la esquina). El form de comprador se sacó de esta sección — WhatsApp sigue siendo el canal principal para compradores en el resto del sitio.
+
 ## Evidence on Hand (actualizado 2026-08-27 — secciones post-hero)
 
 - **Catálogo completo real** (`data/properties.json`, generado por `scripts/import-properties.mjs` desde el CSV del MLS): 866 propiedades activas, sin PII del dueño. Página `/propiedades` con filtros (zona, operación, tipo, precio máximo) y "cargar más" (24 por página) — no renderiza las 866 de una.

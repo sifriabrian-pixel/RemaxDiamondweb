@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const WHATSAPP_HREF =
   "https://wa.me/593985437529?text=" +
   encodeURIComponent("Hola, quiero más información sobre una propiedad en Manta.");
@@ -17,9 +19,10 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-3">
           <div>
-            <p className="font-display text-lg font-extrabold">
-              <span className="text-red">RE/MAX</span> Diamond
-            </p>
+            <div className="flex items-center gap-2">
+              <Image src="/brand/logo-light.png" alt="RE/MAX" width={1112} height={308} sizes="100px" className="h-6 w-auto" />
+              <span className="font-display text-lg font-extrabold text-red">Diamond</span>
+            </div>
             <p className="mt-4 max-w-[26ch] text-sm leading-relaxed text-cream/60">
               Av. Flavio Reyes entre Av. 24 y Calle 23, CC Manta Shopping Maincentro,
               Local 26, Manta, Manabí.
