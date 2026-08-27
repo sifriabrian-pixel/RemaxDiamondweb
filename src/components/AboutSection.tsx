@@ -28,8 +28,8 @@ export function AboutSection() {
           <p className="mt-5 max-w-[58ch] leading-relaxed text-cream/75">
             RE/MAX Diamond es la oficina de la red RE/MAX en Manta, liderada por el
             broker Yonny Tuárez Palacios. No es un portal genérico con vendedores
-            rotando cada seis meses: es un equipo fijo que trabaja el catálogo real de
-            la oficina, zona por zona.
+            rotando cada seis meses: es un equipo fijo, con nombre y cara, que conoce
+            cada propiedad de la oficina zona por zona.
           </p>
         </motion.div>
 

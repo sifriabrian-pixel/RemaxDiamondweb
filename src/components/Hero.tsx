@@ -31,22 +31,24 @@ export function Hero() {
     >
       {/* Foto aérea real de Manta al atardecer — Municipio de Manta, Wikimedia Commons,
           CC BY-SA 4.0 (https://commons.wikimedia.org/wiki/File:Panoramicamantaec.jpg).
-          No es banco de imágenes genérico: es la ciudad real. Reemplazar por una foto
-          propia cuando Brian tenga sesión de fotos dedicada. */}
+          Crédito de la licencia: visible en el footer (no en el hero, a pedido del
+          cliente), y en el alt para lectores de pantalla. No es banco de imágenes
+          genérico: es la ciudad real. Reemplazar por una foto propia cuando Brian
+          tenga sesión de fotos dedicada.
+          Overlay: navy uniforme sobre toda la foto (no solo un degradé de abajo hacia
+          arriba) para bajar el rosa/violeta del atardecer y quedar consistente con el
+          resto del sitio — opción A pedida por el cliente, sin cambiar de foto. */}
       <div className="absolute inset-0">
         <Image
           src="/properties/manta-skyline-sunset.jpg"
-          alt="Vista aérea de Manta, Manabí, al atardecer"
+          alt="Vista aérea de Manta, Manabí, al atardecer (Municipio de Manta, CC BY-SA 4.0)"
           fill
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/25" />
+        <div className="absolute inset-0 bg-navy/55" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-navy/35" />
       </div>
-
-      <p className="absolute right-6 top-24 z-10 text-xs text-cream/70 sm:right-10">
-        Manta, Manabí — foto: Municipio de Manta (CC BY-SA)
-      </p>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.85, y: 20 }}
@@ -80,10 +82,11 @@ export function Hero() {
 
           <motion.p
             variants={rise}
-            className="mt-6 max-w-[38ch] text-lg leading-relaxed text-cream/75"
+            className="mt-6 max-w-[40ch] text-lg leading-relaxed text-cream/75"
           >
-            866 propiedades activas en Manta, Portoviejo, Jaramijó y Montecristi,
-            con un equipo que conoce cada barrio de la costa.
+            866 propiedades activas en Manta, Portoviejo, Jaramijó y Montecristi
+            — el catálogo más completo de la zona, con el equipo que conoce cada
+            barrio.
           </motion.p>
 
           <motion.div variants={rise} className="mt-9 flex flex-wrap items-center gap-4">

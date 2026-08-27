@@ -49,8 +49,12 @@ export function StatsStrip() {
           </motion.div>
         ))}
       </div>
+      {/* Antes decía "Datos del catálogo real de RE/MAX Diamond (MLS Redremax,
+          actualizado 27/08/2026)" — el cliente pidió sacar el nombre del sistema
+          interno y la fecha exacta (hay que actualizarla a mano). Fuente real:
+          export del MLS Redremax del 27/08/2026, ver data/properties.json. */}
       <p className="mx-auto max-w-[1400px] px-8 pb-10 text-xs text-navy/70 sm:px-10">
-        Datos del catálogo real de RE/MAX Diamond (MLS Redremax, actualizado 27/08/2026).
+        Actualizado esta semana.
       </p>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const WHATSAPP_HREF =
@@ -87,6 +88,15 @@ export function TeamSection() {
               </p>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-6 flex justify-center">
+          <Link
+            href="/equipo"
+            className="text-sm font-semibold text-navy underline decoration-navy/30 underline-offset-4 transition-colors hover:text-red-deep hover:decoration-red-deep"
+          >
+            +32 asesores más → Ver equipo completo
+          </Link>
         </div>
 
         <motion.div

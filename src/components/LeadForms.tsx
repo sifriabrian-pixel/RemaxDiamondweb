@@ -62,8 +62,7 @@ export function LeadForms() {
               Vendé con el equipo que más rápido mueve la costa.
             </h3>
             <p className="mt-2 max-w-[42ch] text-sm text-navy/60">
-              Dejanos los datos de tu propiedad y te contactamos para coordinar una
-              tasación y una visita.
+              Contanos sobre tu propiedad y coordinamos tasación y visita en el día.
             </p>
             <div className="mt-7">
               <LeadForm
@@ -97,9 +96,9 @@ export function LeadForms() {
                 Vendé más, con la red más grande de la costa.
               </h3>
               <p className="mt-2 max-w-[38ch] text-sm text-cream/65">
-                RE/MAX Diamond busca asesores que quieran ganar en serio. Catálogo real,
-                comisiones competitivas y un equipo que ya domina Manta y Manabí.
-                Postulate en dos minutos.
+                37 asesores ya facturan con el catálogo más completo de Manta y Manabí.
+                Vos entrás con propiedades reales desde el día uno — no con una cartera
+                vacía para armar de cero. Postulate en dos minutos.
               </p>
               <div className="relative mt-7">
                 <LeadForm

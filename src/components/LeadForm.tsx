@@ -24,17 +24,35 @@ export function LeadForm({
   formspreeId,
   whatsappHref,
   submitLabel = "Enviar",
+  whatsappLabel = "Hablar por WhatsApp",
   variant = "light",
 }: {
   fields: LeadFormField[];
   formspreeId: string | undefined;
   whatsappHref: string;
   submitLabel?: string;
+  whatsappLabel?: string;
   variant?: Variant;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const configured = Boolean(formspreeId);
   const dark = variant === "dark";
+
+  // Sin Formspree configurado todavía: nada de campos vacíos ni de avisos de
+  // "en configuración" — un solo CTA de WhatsApp, limpio. El form completo
+  // (fields de abajo) vuelve solo cuando formspreeId sea real.
+  if (!configured) {
+    return (
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex items-center gap-2 rounded-sm bg-red-bridge px-6 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+      >
+        {whatsappLabel} →
+      </a>
+    );
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -75,12 +93,6 @@ export function LeadForm({
         <FieldInput key={field.name} field={field} dark={dark} />
       ))}
 
-      {!configured && (
-        <p className={`text-xs ${dark ? "text-cream/70" : "text-navy/70"}`}>
-          Formulario en configuración — por ahora, escribinos directo por WhatsApp.
-        </p>
-      )}
-
       {status === "error" && (
         <p className={`text-xs ${dark ? "text-red" : "text-red-deep"}`}>
           No se pudo enviar. Probá de nuevo o escribinos por WhatsApp.
@@ -90,7 +102,7 @@ export function LeadForm({
       <div className="mt-1 flex flex-wrap items-center gap-4">
         <button
           type="submit"
-          disabled={!configured || status === "sending"}
+          disabled={status === "sending"}
           className="rounded-sm bg-red-bridge px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
         >
           {status === "sending" ? "Enviando…" : submitLabel}

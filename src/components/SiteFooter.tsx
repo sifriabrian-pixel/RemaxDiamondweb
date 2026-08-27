@@ -63,10 +63,17 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-cream/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-cream/60">
-            © {new Date().getFullYear()} RE/MAX Diamond, Manta. Franquicia independiente RE/MAX.
-          </p>
+        <div className="mt-16 flex flex-col gap-2 border-t border-cream/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs text-cream/60">
+              © {new Date().getFullYear()} RE/MAX Diamond, Manta. Franquicia independiente RE/MAX.
+            </p>
+            {/* Atribución CC BY-SA 4.0 de la foto del hero — la licencia la exige; el
+                cliente pidió que no esté sobre la foto, así que vive acá, discreta. */}
+            <p className="mt-1 text-[0.68rem] text-cream/60">
+              Foto de portada: Municipio de Manta, Wikimedia Commons (CC BY-SA 4.0).
+            </p>
+          </div>
           {/* Segundo punto de reclutamiento: un solo link discreto, no un CTA grande
               (ese ya está en la sección de equipo). */}
           <a

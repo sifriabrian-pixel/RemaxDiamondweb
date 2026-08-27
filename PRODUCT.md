@@ -49,6 +49,14 @@ Identidad visual 100% independiente del template genérico remax.com.ec y de cua
 - Frases de marca ya en uso por el cliente: "Nadie en el mundo vende más bienes raíces que REMAX", "Múdate a la vida que quieres".
 - Fase 0 (exploración visual) ya se corrió y el cliente aprobó una dirección de hero combinada — ver `## Evidence on Hand` y el DESIGN.md que new-work va a generar a partir de esta dirección.
 
+## Evidence on Hand (actualizado 2026-08-27 — revisión de copy + checklist de assets)
+
+- **Copy revisado en hero, stats, "Franquicia", equipo y forms** según feedback del cliente (documento de revisión de copy): headline conecta titular+prueba, se sacaron las notas de fuente/MLS visibles (crédito de foto movido al footer por requisito de la licencia CC BY-SA, no se puede eliminar del todo), overlay del hero más navy/menos rosa-violeta (opción A, misma foto).
+- **Chip "Visitada por el equipo · Precio confirmado con el propietario" — NO implementado**: el cliente lo sugirió para las cards de propiedades destacadas, pero no hay confirmación real de que el equipo haya visitado cada una de las 9 propiedades ni de que el precio esté reconfirmado con cada dueño. Agregar esa etiqueta sin verificarlo violaría la política del propio proyecto (cero contenido inventado). Pendiente: confirmar con Brian/Yonny cuáles de las 9 destacadas cumplen esto antes de agregar el chip solo a esas.
+- **Página `/equipo` nueva**: lista los 37 asesores reales (nombre + cantidad de propiedades activas, derivado de `data/properties.json`), ordenados por volumen. Resuelve el CTA "+32 asesores más → Ver equipo completo" del home con una promesa real, no decorativa.
+- **Forms sin Formspree configurado**: ya no muestran campos vacíos ni "en configuración" — un solo botón de WhatsApp limpio. Cuando `NEXT_PUBLIC_FORMSPREE_SELLER_ID` / `_RECRUIT_ID` tengan un valor real, el form completo (con los campos ya definidos) aparece automáticamente.
+- **Botón flotante de WhatsApp** (`WhatsAppFloat.tsx`): visible en todo el sitio; en la home aparece recién después de pasar el hero (que ya tiene su propio CTA grande) para no duplicar.
+
 ## Evidence on Hand (actualizado 2026-08-27 — logo real, mascota, forms separados)
 
 - **Logo real** (`public/brand/logo-light.png` transparente, cream, para fondos navy; `logo-diamond-dark.png` con texto negro, para fondos claros — bajados de Drive): reemplaza el wordmark de texto en header y footer. "Diamond" sigue siendo texto (rojo, Archivo) al lado del ícono+REMAX, porque el archivo de Drive no trae una versión con "Diamond" ya integrado en el lockup claro.
