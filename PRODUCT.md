@@ -49,8 +49,11 @@ Identidad visual 100% independiente del template genérico remax.com.ec y de cua
 - Frases de marca ya en uso por el cliente: "Nadie en el mundo vende más bienes raíces que REMAX", "Múdate a la vida que quieres".
 - Fase 0 (exploración visual) ya se corrió y el cliente aprobó una dirección de hero combinada — ver `## Evidence on Hand` y el DESIGN.md que new-work va a generar a partir de esta dirección.
 
-## Evidence on Hand
+## Evidence on Hand (actualizado 2026-08-27 — fotos reales agregadas)
 
+- **Fotos reales del equipo** (`public/team/*.webp`) y de la oficina (`public/office/diamond-office.webp`): descargadas del sitio oficial `remax.com.ec/diamond` (broker + 4 asesores con foto pública, cada uno con su propio email/celular real en `@remax.com.ec`). El roster público del sitio oficial (5 personas) es más chico que los 37 agentes con listings activos en el CSV del MLS — se priorizó cara real sobre cobertura total.
+- **Foto real de propiedad para el hero** (`public/properties/hero-crucita-pool.jpg`): piscina con vista al mar, casa en venta en Crucita, Manabí — tomada del mismo sitio oficial (listing real del catálogo, no banco de imágenes). Reemplaza el placeholder "foto pendiente" que se usó antes de tener esto.
+- **Discrepancia de contacto sin resolver:** el sitio oficial muestra `0999283821 / 052628090` (celular + fijo) y `diamond@remax.com.ec` como contacto de oficina, distinto del `+593 98 543 7529` que Brian pasó como "numero oficina". No se cambió el CTA de WhatsApp del sitio sin confirmar con Brian cuál es el correcto — verificar antes de asumir que son intercambiables.
 - Manual de marca real (PDF, Drive) con paleta y tipografía — usado para `## Brand Commitments`.
 - 5 logos PNG + 1 asset de mascota "Diamantito" (Drive, sin descargar aún a este repo).
 - CSV real de catálogo `C:\Users\sifri\Downloads\reporte_propiedades-27082026.csv` (~879 filas, PII de dueños — ver constraint arriba).

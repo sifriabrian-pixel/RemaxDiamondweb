@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const WHATSAPP_HREF =
@@ -28,13 +29,24 @@ export function Hero() {
       id="top"
       className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-navy pt-28 pb-16 sm:pb-20"
     >
-      {/* Base field: no property photo yet — this stays an explicit placeholder, never a stock
-          image or decorative gradient dressed up as one. Swap PropertyPlaceholder for a real
-          <Image> the moment Brian delivers a hero photo (drone/atardecer, plano completo). */}
+      {/* Foto real de una propiedad del catálogo (casa con piscina, Crucita, Manabí — RE/MAX
+          Diamond), tomada del sitio oficial remax.com.ec/diamond. No es banco de imágenes: es
+          una propiedad real del inventario. Reemplazar por una foto propia (dron/atardecer)
+          cuando Brian tenga sesión de fotos dedicada; hasta entonces esta es honesta. */}
       <div className="absolute inset-0">
-        <PropertyPlaceholder />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/10" />
+        <Image
+          src="/properties/hero-crucita-pool.jpg"
+          alt="Piscina con vista al mar de una propiedad RE/MAX Diamond en Crucita, Manabí"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/25" />
       </div>
+
+      <p className="absolute right-6 top-24 z-10 text-xs text-cream/45 sm:right-10">
+        Crucita, Manabí — propiedad del catálogo
+      </p>
 
       <motion.div
         variants={container}
@@ -90,47 +102,3 @@ export function Hero() {
   );
 }
 
-function PropertyPlaceholder() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center bg-navy-soft">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, var(--diamond-cream) 1px, transparent 1px), linear-gradient(var(--diamond-cream) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
-      <div className="relative flex max-w-xs flex-col items-center gap-3 rounded-sm border border-dashed border-cream/30 px-8 py-10 text-center">
-        <CameraIcon />
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-cream/60">
-          Foto de propiedad pendiente
-        </p>
-        <p className="text-xs leading-relaxed text-cream/40">
-          Plano completo, dron / atardecer. Se reemplaza este bloque por la foto real
-          antes de producción — nunca por un banco de imágenes.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function CameraIcon() {
-  return (
-    <svg
-      width="28"
-      height="28"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="text-cream/45"
-    >
-      <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" />
-      <circle cx="12" cy="13.5" r="3.4" />
-    </svg>
-  );
-}

@@ -1,27 +1,23 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const WHATSAPP_HREF =
   "https://wa.me/593985437529?text=" +
   encodeURIComponent("Hola, quiero información sobre sumarme como asesor de RE/MAX Diamond.");
 
-// Agentes reales del catálogo (MLS Redremax, 27/08/2026), ordenados por propiedades
-// activas a cargo. Sin fotos todavía — avatar de iniciales hasta tener fotos reales
-// del equipo; nunca un stock photo de relleno.
+// Equipo publicado en el sitio oficial remax.com.ec/diamond (fotos reales, descargadas
+// a /public/team el 27/08/2026). Es el roster público de la oficina — más chico que el
+// listado de 37 asesores con propiedades activas en el CSV del MLS (esos no tienen foto
+// pública todavía), así que se prioriza cara real sobre cantidad.
 const AGENTS = [
-  { name: "Yonny Tuarez Palacios", role: "Broker / Owner", listings: 56 },
-  { name: "Luis Fernando Avila Gomez", role: "Asesor inmobiliario", listings: 78 },
-  { name: "Alejandra Rivadeneira Mendez", role: "Asesora inmobiliaria", listings: 70 },
-  { name: "María Gabriela Rodriguez Andrade", role: "Asesora inmobiliaria", listings: 64 },
-  { name: "Humberto Horacio Mendoza Montesdeoca", role: "Asesor inmobiliario", listings: 55 },
-  { name: "Carmen Alexandra Pozo Alvarez", role: "Asesora inmobiliaria", listings: 47 },
+  { name: "Yonny Tuarez Palacios", role: "Broker", photo: "/team/yonny-tuarez.webp", listings: 56 },
+  { name: "America Marina Vinueza Borja", role: "Asesora inmobiliaria", photo: "/team/america-vinueza.webp", listings: 25 },
+  { name: "Ever Alejandro Valle Vinces", role: "Asesor inmobiliario", photo: "/team/ever-valle.webp", listings: 13 },
+  { name: "Gloria Teresa Rodriguez Vargas", role: "Asesora inmobiliaria", photo: "/team/gloria-rodriguez.webp", listings: 3 },
+  { name: "Roxana Jasmin Bermello Mendoza", role: "Asesora inmobiliaria", photo: "/team/roxana-bermello.webp", listings: 1 },
 ];
-
-function initials(name: string) {
-  const parts = name.trim().split(/\s+/);
-  return (parts[0][0] + (parts[1]?.[0] ?? "")).toUpperCase();
-}
 
 export function TeamSection() {
   return (
@@ -39,8 +35,8 @@ export function TeamSection() {
           </h2>
           <p className="mt-4 text-navy/60">
             {/* 37: agentes distintos con al menos una propiedad "Activa" en el CSV MLS Redremax (27/08/2026). */}
-            37 asesores activos en Manta y Manabí. Estos son los que hoy tienen más
-            propiedades a cargo en el catálogo.
+            37 asesores activos en Manta y Manabí, liderados por Yonny Tuárez y su equipo
+            de broker.
           </p>
         </motion.div>
 
@@ -54,8 +50,8 @@ export function TeamSection() {
               transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col gap-4 bg-cream px-7 py-8"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-navy font-display text-sm font-bold text-cream">
-                {initials(agent.name)}
+              <div className="relative h-14 w-14 overflow-hidden rounded-full bg-navy">
+                <Image src={agent.photo} alt={agent.name} fill sizes="56px" className="object-cover" />
               </div>
               <div>
                 <p className="font-display text-base font-bold leading-snug text-navy">
@@ -64,7 +60,7 @@ export function TeamSection() {
                 <p className="mt-0.5 text-sm text-navy/70">{agent.role}</p>
               </div>
               <p className="mt-auto text-xs font-semibold uppercase tracking-[0.08em] text-navy/70">
-                {agent.listings} propiedades activas
+                {agent.listings} {agent.listings === 1 ? "propiedad activa" : "propiedades activas"}
               </p>
             </motion.div>
           ))}
