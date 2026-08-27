@@ -58,12 +58,12 @@ export function SiteHeader() {
           <span className="font-display text-lg font-extrabold text-red sm:text-xl">Diamond</span>
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-9 md:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-cream/80 transition-colors hover:text-cream"
+              className="text-base font-medium text-cream/80 transition-colors hover:text-cream"
             >
               {link.label}
             </a>
@@ -75,7 +75,7 @@ export function SiteHeader() {
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noreferrer"
-            className="hidden rounded-full border border-cream/30 px-4 py-2 text-sm font-semibold text-cream transition-colors hover:border-cream hover:bg-cream hover:text-navy sm:inline-block"
+            className="hidden rounded-full border border-cream/30 px-4 py-2 text-base font-semibold text-cream transition-colors hover:border-cream hover:bg-cream hover:text-navy sm:inline-block"
           >
             +593 98 543 7529
           </a>

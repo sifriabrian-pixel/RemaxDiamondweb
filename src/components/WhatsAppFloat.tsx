@@ -1,40 +1,19 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-
 const WHATSAPP_HREF =
   "https://wa.me/593985437529?text=" +
   encodeURIComponent("Hola, vi la web de RE/MAX Diamond y quiero más información 🏡");
 
-// Burbuja fija de WhatsApp — visible en todo el sitio salvo mientras el hero está
-// en pantalla en la home (ahí ya hay un CTA de WhatsApp grande, uno más sería
-// redundante). En cualquier otra página aparece de entrada.
+// Burbuja fija de WhatsApp — siempre visible, en todas las páginas (a pedido
+// del cliente), sin depender del scroll.
 export function WhatsAppFloat() {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
-  const [visible, setVisible] = useState(!isHome);
-
-  useEffect(() => {
-    if (!isHome) {
-      setVisible(true);
-      return;
-    }
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.85);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
-
   return (
     <a
       href={WHATSAPP_HREF}
       target="_blank"
       rel="noreferrer"
       aria-label="Hablar por WhatsApp"
-      className={`fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_20px_-4px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 sm:bottom-7 sm:right-7 ${
-        visible ? "opacity-100" : "pointer-events-none translate-y-3 opacity-0"
-      }`}
+      className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_20px_-4px_rgba(0,0,0,0.4)] transition-transform hover:scale-105 sm:bottom-7 sm:right-7"
     >
       <WhatsAppIcon />
     </a>

@@ -77,7 +77,8 @@ export function Hero() {
             variants={rise}
             className="font-display text-[clamp(2.4rem,6vw,4.6rem)] font-extrabold leading-[0.98] tracking-tight text-cream"
           >
-            La costa tiene <span className="text-red">dueño</span>, no inquilino.
+            Conocemos cada barrio de la costa. Por eso vendemos{" "}
+            <span className="text-red">más rápido</span>.
           </motion.h1>
 
           <motion.p
@@ -85,8 +86,7 @@ export function Hero() {
             className="mt-6 max-w-[40ch] text-lg leading-relaxed text-cream/75"
           >
             866 propiedades activas en Manta, Portoviejo, Jaramijó y Montecristi
-            — el catálogo más completo de la zona, con el equipo que conoce cada
-            barrio.
+            — el catálogo más completo de la zona.
           </motion.p>
 
           <motion.div variants={rise} className="mt-9 flex flex-wrap items-center gap-4">
