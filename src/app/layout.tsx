@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Work_Sans } from "next/font/google";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -34,14 +36,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           STORY: un comprador/vendedor entiende en el primer segundo que esto es una inmobiliaria seria en
           Manta con catálogo real, y actúa (ver propiedades / WhatsApp).
           FIRST VIEWPORT: navy full-bleed, headline de categoría a la izquierda/centro, CTA primario rojo +
-          CTA secundario WhatsApp sin competir en jerarquía, foto real de propiedad marcada como pendiente
-          hasta reemplazo, franja de stats reales fuera del hero.
+          CTA secundario WhatsApp sin competir en jerarquía, foto real de una propiedad del catálogo de
+          fondo, franja de stats reales fuera del hero.
           FORM: dirección pinneada por el cliente tras 3 exploraciones (fase 0) — sin roll de concept-seed,
           brief-pinned direction.
           FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the
           verdict, DESIGN.md, and every shipping raster carrying its provenance.
         */}
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

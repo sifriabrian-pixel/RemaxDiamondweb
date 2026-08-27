@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const WHATSAPP_HREF =
@@ -7,33 +8,43 @@ const WHATSAPP_HREF =
   encodeURIComponent("Hola, quiero más información sobre una propiedad en Manta.");
 
 const NAV_LINKS = [
-  { href: "#catalogo", label: "Catálogo" },
-  { href: "#equipo", label: "Equipo" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/propiedades", label: "Propiedades" },
+  { href: "/#catalogo", label: "Catálogo" },
+  { href: "/#equipo", label: "Equipo" },
+  { href: "/#contacto", label: "Contacto" },
 ];
 
 export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Solo la home tiene un hero navy full-bleed debajo del header — ahí el header
+  // arranca transparente y se vuelve sólido al pasar el hero. En cualquier otra
+  // ruta (sin hero navy) el header es sólido siempre, o el texto crema queda
+  // invisible sobre el fondo crema de la página.
+  const solid = !isHome || scrolledPastHero;
+
   useEffect(() => {
+    if (!isHome) return;
     const onScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.7);
+      setScrolledPastHero(window.scrollY > window.innerHeight * 0.7);
       setMenuOpen(false);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-30 transition-colors duration-300 ${
-        scrolled ? "bg-navy/95 backdrop-blur-sm" : "bg-transparent"
+        solid ? "bg-navy/95 backdrop-blur-sm" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-5 sm:px-10">
-        <a href="#top" className="font-display text-lg font-extrabold tracking-tight text-cream sm:text-xl">
+        <a href="/" className="font-display text-lg font-extrabold tracking-tight text-cream sm:text-xl">
           <span className="text-red">RE/MAX</span>{" "}
           <span className="font-medium">Diamond</span>
         </a>

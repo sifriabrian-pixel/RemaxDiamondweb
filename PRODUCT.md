@@ -49,7 +49,16 @@ Identidad visual 100% independiente del template genérico remax.com.ec y de cua
 - Frases de marca ya en uso por el cliente: "Nadie en el mundo vende más bienes raíces que REMAX", "Múdate a la vida que quieres".
 - Fase 0 (exploración visual) ya se corrió y el cliente aprobó una dirección de hero combinada — ver `## Evidence on Hand` y el DESIGN.md que new-work va a generar a partir de esta dirección.
 
-## Evidence on Hand (actualizado 2026-08-27 — fotos reales agregadas)
+## Evidence on Hand (actualizado 2026-08-27 — secciones post-hero)
+
+- **Catálogo completo real** (`data/properties.json`, generado por `scripts/import-properties.mjs` desde el CSV del MLS): 866 propiedades activas, sin PII del dueño. Página `/propiedades` con filtros (zona, operación, tipo, precio máximo) y "cargar más" (24 por página) — no renderiza las 866 de una.
+- **9 propiedades destacadas con foto real** (`src/lib/featured-properties.ts`, fotos en `public/properties/`): únicas con foto pública, bajadas de remax.com.ec/diamond y de las páginas de agentes, cada una visitada individualmente para verificar precio/m²/detalle antes de publicar. Tienen página de detalle propia (`/propiedades/[slug]`, estática).
+- **Quiénes somos y stats del "equipo"** (`AboutSection.tsx`): solo cifras verificadas (866 propiedades, 4 zonas, 37 asesores). Año de fundación, cantidad de operaciones cerradas y certificaciones NO están confirmados — se dejaron fuera del copy en vez de inventar un número, con nota en el código de qué pedirle a Brian/Yonny si se quiere agregar.
+- **Equipo restructurado**: broker (Yonny Tuárez) con jerarquía visual propia (card grande, separada), grid de los otros 4 asesores con foto debajo.
+- **Zona/mapa**: iframe de Google Maps sin API key (`output=embed`), apuntando a la dirección real de la oficina.
+- **3 formularios** (comprador, vendedor — ambos en home; reclutamiento — link en Equipo y en Footer, sin form propio todavía): usan Formspree vía `NEXT_PUBLIC_FORMSPREE_BUYER_ID` / `NEXT_PUBLIC_FORMSPREE_SELLER_ID`, sin configurar aún — sin esas env vars, el form no intenta el POST (evita fallar en silencio) y muestra el fallback de WhatsApp. Pendiente: Brian tiene que crear el proyecto en Formspree y pasar los IDs reales.
+- **Páginas legales stub** (`/terminos-y-condiciones`, `/politica-de-privacidad`): sin texto legal inventado — página placeholder honesta hasta tener el contenido real.
+- **Redes sociales del footer:** no se agregaron. Las únicas que aparecen en remax.com.ec son las de la marca nacional (@remax_ecuador), no cuentas propias de la oficina Diamond — no corresponde linkearlas como si fueran de Diamond sin confirmar que existen cuentas propias.
 
 - **Fotos reales del equipo** (`public/team/*.webp`) y de la oficina (`public/office/diamond-office.webp`): descargadas del sitio oficial `remax.com.ec/diamond` (broker + 4 asesores con foto pública, cada uno con su propio email/celular real en `@remax.com.ec`). El roster público del sitio oficial (5 personas) es más chico que los 37 agentes con listings activos en el CSV del MLS — se priorizó cara real sobre cobertura total.
 - **Foto real de propiedad para el hero** (`public/properties/hero-crucita-pool.jpg`): piscina con vista al mar, casa en venta en Crucita, Manabí — tomada del mismo sitio oficial (listing real del catálogo, no banco de imágenes). Reemplaza el placeholder "foto pendiente" que se usó antes de tener esto.

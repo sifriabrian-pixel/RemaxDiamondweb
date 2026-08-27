@@ -44,7 +44,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/25" />
       </div>
 
-      <p className="absolute right-6 top-24 z-10 text-xs text-cream/45 sm:right-10">
+      <p className="absolute right-6 top-24 z-10 text-xs text-cream/70 sm:right-10">
         Crucita, Manabí — propiedad del catálogo
       </p>
 
@@ -73,7 +73,7 @@ export function Hero() {
           <motion.div variants={rise} className="mt-9 flex flex-wrap items-center gap-4">
             {/* red-bridge (#AA1120), not red (#FF1200): white text on the brighter red misses 4.5:1 */}
             <a
-              href="#catalogo"
+              href="/propiedades"
               className="rounded-sm bg-red-bridge px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:shadow-[0_12px_24px_-8px_rgba(170,17,32,0.55)]"
             >
               Ver propiedades

@@ -6,6 +6,11 @@ const RECRUIT_WHATSAPP_HREF =
   "https://wa.me/593985437529?text=" +
   encodeURIComponent("Hola, quiero información sobre sumarme como asesor de RE/MAX Diamond.");
 
+const LEGAL_LINKS = [
+  { href: "/terminos-y-condiciones", label: "Términos y condiciones" },
+  { href: "/politica-de-privacidad", label: "Política de privacidad" },
+];
+
 export function SiteFooter() {
   return (
     <footer id="contacto" className="scroll-mt-24 bg-navy py-16 text-cream">
@@ -37,24 +42,39 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="max-w-[30ch] text-sm leading-relaxed text-cream/70">
-              ¿Querés sumarte al equipo RE/MAX Diamond?
+            <p className="text-sm leading-relaxed text-cream/70">
+              Links
             </p>
-            {/* Misma familia de botón que el CTA secundario del hero, en escala reducida. */}
-            <a
-              href={RECRUIT_WHATSAPP_HREF}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-block rounded-sm border border-cream/35 px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:border-cream hover:bg-cream hover:text-navy"
-            >
-              Hablar con reclutamiento →
-            </a>
+            <ul className="mt-3 flex flex-col gap-2">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-cream/60 underline decoration-cream/25 underline-offset-4 transition-colors hover:text-cream hover:decoration-cream/50"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <p className="mt-16 border-t border-cream/12 pt-6 text-xs text-cream/60">
-          © {new Date().getFullYear()} RE/MAX Diamond, Manta. Franquicia independiente RE/MAX.
-        </p>
+        <div className="mt-16 flex flex-col gap-3 border-t border-cream/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-cream/60">
+            © {new Date().getFullYear()} RE/MAX Diamond, Manta. Franquicia independiente RE/MAX.
+          </p>
+          {/* Segundo punto de reclutamiento: un solo link discreto, no un CTA grande
+              (ese ya está en la sección de equipo). */}
+          <a
+            href={RECRUIT_WHATSAPP_HREF}
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs text-cream/50 underline decoration-cream/20 underline-offset-4 transition-colors hover:text-cream hover:decoration-cream/50"
+          >
+            ¿Sos asesor y querés sumarte? →
+          </a>
+        </div>
       </div>
     </footer>
   );
