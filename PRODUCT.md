@@ -91,6 +91,14 @@ Identidad visual 100% independiente del template genérico remax.com.ec y de cua
   - Exploración visual completa: artifact `remax-diamond-fase0.html` (publicado, no versionado en este repo).
 - Ausencias que el trabajo futuro no debe inventar: sin fotos reales de propiedades, sin fotos de equipo/agentes, sin testimonios, sin cifras de "años de experiencia" u otras credenciales no confirmadas.
 
+## Evidence on Hand (actualizado 2026-08-28 — catálogo con 100 fotos reales)
+
+- **100 propiedades en venta con foto real** (`data/venta-100.json`, fotos en `public/properties/venta/`): scrapeadas del sitio oficial `remax.com.ec/diamond`, endpoint paginado de listings filtrado por `operationId=1` (Venta) y `officeId` de la oficina Diamond específicamente (no la marca nacional). Cada registro trae precio, dirección, título, zona, agente (matcheado contra los 37 nombres reales del CSV del MLS) y specs (terreno/totales/cubiertos/ambientes/baños), todos extraídos del texto real de la card — cero dato inventado. Fotos bajadas a resolución mayor (860x440) desde el mismo CDN. Reemplaza el set anterior de 9 propiedades curadas a mano (`featured-properties.ts`, eliminado).
+- **Pedido explícito del cliente**: mostrar el catálogo con fotos "como el de Sonia Seven inmobiliaria" con ficha individual por propiedad. Al preguntar cuántas mostrar (866 alquiler+venta, o subconjunto), Brian aclaró: "No es necesario mostrar 697. Mostra 100 en venta" — de ahí el alcance de exactamente 100, solo Venta.
+- **`/propiedades` restructurada**: grid de fotos de las 100 propiedades en venta como contenido principal (con filtro de zona), y el catálogo completo anterior (866 propiedades, venta+alquiler, sin foto) queda como sección secundaria colapsable ("Ver catálogo completo sin foto") para no perder cobertura.
+- **`/propiedades/[slug]`**: ficha estática por cada una de las 100 propiedades (foto grande, precio, specs, agente, CTA WhatsApp). Ya no tiene campo de descripción larga (el dataset scrapeado no lo trae) — solo datos estructurados reales.
+- Home (`FeaturedProperties.tsx`) ahora toma las primeras 9 de este dataset en vez del set curado viejo.
+
 ## Product Principles
 
 1. Identidad propia, no template de franquicia ni de portal inmobiliario genérico — cada decisión visual se mide contra "¿esto podría ser cualquier otra inmobiliaria de LATAM?".

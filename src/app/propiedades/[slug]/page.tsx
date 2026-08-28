@@ -1,21 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { featuredProperties } from "@/lib/featured-properties";
+import { ventaProperties, findVentaBySlug, formatVentaPrice } from "@/lib/venta-properties";
 
 export function generateStaticParams() {
-  return featuredProperties.map((p) => ({ slug: p.slug }));
+  return ventaProperties.map((p) => ({ slug: p.slug }));
 }
 
-function formatPrice(precio: number | null, operacion: string) {
-  if (precio === null) return "Consultar precio";
-  const formatted = new Intl.NumberFormat("es-EC", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(precio);
-  return operacion === "Alquiler" ? `${formatted}/mes` : formatted;
-}
+const SPEC_LABELS: Record<string, string> = {
+  terreno: "Terreno",
+  totales: "Superficie total",
+  cubiertos: "Superficie cubierta",
+  ambientes: "Ambientes",
+  banos: "Baños",
+};
 
 export default async function PropertyDetailPage({
   params,
@@ -23,12 +21,14 @@ export default async function PropertyDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const property = featuredProperties.find((p) => p.slug === slug);
+  const property = findVentaBySlug(slug);
   if (!property) notFound();
 
   const whatsappHref =
     "https://wa.me/593985437529?text=" +
     encodeURIComponent(`Hola, me interesa: ${property.titulo} (${property.zona}).`);
+
+  const specEntries = Object.entries(property.specs).filter(([, v]) => v);
 
   return (
     <main className="bg-cream pb-24 pt-28">
@@ -49,12 +49,8 @@ export default async function PropertyDetailPage({
             sizes="(min-width: 1024px) 1000px, 100vw"
             className="object-cover"
           />
-          <span
-            className={`absolute left-4 top-4 rounded-sm px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-white ${
-              property.operacion === "Alquiler" ? "bg-red-bridge" : "bg-navy"
-            }`}
-          >
-            {property.operacion}
+          <span className="absolute left-4 top-4 rounded-sm bg-navy px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-white">
+            Venta
           </span>
         </div>
 
@@ -66,28 +62,22 @@ export default async function PropertyDetailPage({
             <p className="mt-2 text-navy/60">
               {property.zona} — {property.direccion}
             </p>
-            <p className="mt-6 max-w-[60ch] leading-relaxed text-navy/75">
-              {property.descripcion}
-            </p>
+            <p className="mt-6 text-sm text-navy/60">Asesor: {property.agente}</p>
           </div>
 
           <div className="shrink-0 sm:w-64">
             <p className="font-display text-2xl font-extrabold text-navy">
-              {formatPrice(property.precio, property.operacion)}
+              {formatVentaPrice(property.precio)}
             </p>
             <dl className="mt-4 space-y-2 text-sm text-navy/70">
-              <div className="flex justify-between border-b border-navy/10 py-1.5">
-                <dt>Tipo</dt>
-                <dd className="font-medium text-navy">{property.tipo}</dd>
-              </div>
-              <div className="flex justify-between border-b border-navy/10 py-1.5">
-                <dt>Superficie</dt>
-                <dd className="font-medium text-navy">{property.m2}</dd>
-              </div>
-              <div className="flex justify-between border-b border-navy/10 py-1.5">
-                <dt>Detalle</dt>
-                <dd className="font-medium text-navy">{property.detalle}</dd>
-              </div>
+              {specEntries.map(([key, value]) => (
+                <div key={key} className="flex justify-between border-b border-navy/10 py-1.5">
+                  <dt>{SPEC_LABELS[key] ?? key}</dt>
+                  <dd className="font-medium text-navy">
+                    {key === "ambientes" || key === "banos" ? value : `${value} m²`}
+                  </dd>
+                </div>
+              ))}
             </dl>
             <a
               href={whatsappHref}

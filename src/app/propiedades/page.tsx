@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { properties, formatPrice, uniqueZones, uniqueTypes, type Property } from "@/lib/properties";
+import { ventaProperties, ventaZonas } from "@/lib/venta-properties";
+import { PropertyCard } from "@/components/PropertyCard";
 
 const OPERATIONS = ["Venta", "Alquiler", "Alquiler temporal"];
 const PAGE_SIZE = 24;
@@ -19,7 +21,15 @@ function whatsappHrefFor(p: Property) {
 export default function CatalogPage() {
   const zones = useMemo(() => uniqueZones(), []);
   const types = useMemo(() => uniqueTypes(), []);
+  const ventaZones = useMemo(() => ventaZonas(), []);
 
+  const [ventaZona, setVentaZona] = useState("");
+  const ventaFiltered = useMemo(
+    () => (ventaZona ? ventaProperties.filter((p) => p.zona === ventaZona) : ventaProperties),
+    [ventaZona],
+  );
+
+  const [showFullList, setShowFullList] = useState(false);
   const [zona, setZona] = useState("");
   const [operacion, setOperacion] = useState("");
   const [tipo, setTipo] = useState("");
@@ -51,149 +61,194 @@ export default function CatalogPage() {
     <main className="min-h-screen bg-cream pb-24 pt-28">
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
         <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.02] text-navy">
-          Catálogo completo
+          Propiedades en venta
         </h1>
         <p className="mt-3 text-navy/60">
-          {filtered.length} de {properties.length} propiedades activas
-          {zona || operacion || tipo || precioMax ? " con estos filtros" : ""}.
+          {ventaFiltered.length} de {ventaProperties.length} propiedades con foto real
+          {ventaZona ? " en esta zona" : ""}.
         </p>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <select
-            value={zona}
-            onChange={(e) => {
-              setZona(e.target.value);
-              setVisible(PAGE_SIZE);
-            }}
+            value={ventaZona}
+            onChange={(e) => setVentaZona(e.target.value)}
             className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy focus-visible:outline-red-bridge"
           >
             <option value="">Todas las zonas</option>
-            {zones.map((z) => (
+            {ventaZones.map((z) => (
               <option key={z} value={z}>
                 {z}
               </option>
             ))}
           </select>
-
-          <select
-            value={operacion}
-            onChange={(e) => {
-              setOperacion(e.target.value);
-              setVisible(PAGE_SIZE);
-            }}
-            className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy focus-visible:outline-red-bridge"
-          >
-            <option value="">Venta o alquiler</option>
-            {OPERATIONS.map((op) => (
-              <option key={op} value={op}>
-                {op}
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={tipo}
-            onChange={(e) => {
-              setTipo(e.target.value);
-              setVisible(PAGE_SIZE);
-            }}
-            className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy focus-visible:outline-red-bridge"
-          >
-            <option value="">Todos los tipos</option>
-            {types.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-
-          <input
-            type="number"
-            inputMode="numeric"
-            placeholder="Precio máximo (USD)"
-            value={precioMax}
-            onChange={(e) => {
-              setPrecioMax(e.target.value);
-              setVisible(PAGE_SIZE);
-            }}
-            className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy placeholder:text-navy/70 focus-visible:outline-red-bridge"
-          />
+          {ventaZona && (
+            <button
+              type="button"
+              onClick={() => setVentaZona("")}
+              className="text-xs font-semibold text-navy/60 underline decoration-navy/25 underline-offset-4 hover:text-navy"
+            >
+              Limpiar filtro
+            </button>
+          )}
         </div>
 
-        {(zona || operacion || tipo || precioMax) && (
-          <button
-            type="button"
-            onClick={resetFilters}
-            className="mt-3 text-xs font-semibold text-navy/60 underline decoration-navy/25 underline-offset-4 hover:text-navy"
-          >
-            Limpiar filtros
-          </button>
-        )}
-
-        <div className="mt-8 divide-y divide-navy/10 border-y border-navy/10">
-          {shown.length === 0 && (
-            <p className="py-12 text-center text-navy/60">
-              No hay propiedades activas con estos filtros. Probá con otra zona o subí el
-              precio máximo.
-            </p>
-          )}
-          {shown.map((p, i) => (
-            <div
-              key={`${p.direccion}-${p.agente}-${i}`}
-              className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
-            >
-              <div className="flex flex-wrap items-center gap-3">
-                <span
-                  className={`shrink-0 rounded-sm px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-white ${
-                    p.operacion === "Venta" ? "bg-navy" : "bg-red-bridge"
-                  }`}
-                >
-                  {p.operacion}
-                </span>
-                <div>
-                  <p className="font-display text-sm font-bold text-navy">
-                    {p.tipo} · {p.zona}
-                  </p>
-                  <p className="text-xs text-navy/70">
-                    {[
-                      p.ambientes && `${p.ambientes} ambientes`,
-                      p.dormitorios && `${p.dormitorios} dorm.`,
-                      p.totalConstruido && `${p.totalConstruido} m²`,
-                    ]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-5 sm:shrink-0">
-                <p className="font-display text-sm font-bold text-navy">
-                  {formatPrice(p.precio, p.operacion)}
-                </p>
-                <a
-                  href={whatsappHrefFor(p)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="whitespace-nowrap text-xs font-semibold text-navy underline decoration-navy/30 underline-offset-4 transition-colors hover:text-red-deep hover:decoration-red-deep"
-                >
-                  Consultar →
-                </a>
-              </div>
-            </div>
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {ventaFiltered.map((property) => (
+            <PropertyCard key={property.slug} property={property} />
           ))}
         </div>
 
-        {visible < filtered.length && (
-          <div className="mt-8 flex justify-center">
-            <button
-              type="button"
-              onClick={() => setVisible((v) => v + PAGE_SIZE)}
-              className="rounded-sm border border-navy/30 px-7 py-3 text-sm font-semibold text-navy transition-colors hover:border-navy hover:bg-navy hover:text-cream"
-            >
-              Cargar más ({filtered.length - visible} restantes)
-            </button>
-          </div>
-        )}
+        <div className="mt-16 border-t border-navy/10 pt-10">
+          <button
+            type="button"
+            onClick={() => setShowFullList((v) => !v)}
+            className="text-sm font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:text-red-deep hover:decoration-red-deep"
+          >
+            {showFullList ? "Ocultar" : "Ver"} catálogo completo sin foto ({properties.length}{" "}
+            propiedades, venta y alquiler) →
+          </button>
+
+          {showFullList && (
+            <div className="mt-8">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <select
+                  value={zona}
+                  onChange={(e) => {
+                    setZona(e.target.value);
+                    setVisible(PAGE_SIZE);
+                  }}
+                  className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy focus-visible:outline-red-bridge"
+                >
+                  <option value="">Todas las zonas</option>
+                  {zones.map((z) => (
+                    <option key={z} value={z}>
+                      {z}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  value={operacion}
+                  onChange={(e) => {
+                    setOperacion(e.target.value);
+                    setVisible(PAGE_SIZE);
+                  }}
+                  className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy focus-visible:outline-red-bridge"
+                >
+                  <option value="">Venta o alquiler</option>
+                  {OPERATIONS.map((op) => (
+                    <option key={op} value={op}>
+                      {op}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  value={tipo}
+                  onChange={(e) => {
+                    setTipo(e.target.value);
+                    setVisible(PAGE_SIZE);
+                  }}
+                  className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy focus-visible:outline-red-bridge"
+                >
+                  <option value="">Todos los tipos</option>
+                  {types.map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
+                </select>
+
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  placeholder="Precio máximo (USD)"
+                  value={precioMax}
+                  onChange={(e) => {
+                    setPrecioMax(e.target.value);
+                    setVisible(PAGE_SIZE);
+                  }}
+                  className="rounded-sm border border-navy/25 bg-cream px-3 py-2.5 text-sm text-navy placeholder:text-navy/70 focus-visible:outline-red-bridge"
+                />
+              </div>
+
+              {(zona || operacion || tipo || precioMax) && (
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="mt-3 text-xs font-semibold text-navy/60 underline decoration-navy/25 underline-offset-4 hover:text-navy"
+                >
+                  Limpiar filtros
+                </button>
+              )}
+
+              <div className="mt-8 divide-y divide-navy/10 border-y border-navy/10">
+                {shown.length === 0 && (
+                  <p className="py-12 text-center text-navy/60">
+                    No hay propiedades activas con estos filtros. Probá con otra zona o subí el
+                    precio máximo.
+                  </p>
+                )}
+                {shown.map((p, i) => (
+                  <div
+                    key={`${p.direccion}-${p.agente}-${i}`}
+                    className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+                  >
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span
+                        className={`shrink-0 rounded-sm px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-white ${
+                          p.operacion === "Venta" ? "bg-navy" : "bg-red-bridge"
+                        }`}
+                      >
+                        {p.operacion}
+                      </span>
+                      <div>
+                        <p className="font-display text-sm font-bold text-navy">
+                          {p.tipo} · {p.zona}
+                        </p>
+                        <p className="text-xs text-navy/70">
+                          {[
+                            p.ambientes && `${p.ambientes} ambientes`,
+                            p.dormitorios && `${p.dormitorios} dorm.`,
+                            p.totalConstruido && `${p.totalConstruido} m²`,
+                          ]
+                            .filter(Boolean)
+                            .join(" · ")}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-5 sm:shrink-0">
+                      <p className="font-display text-sm font-bold text-navy">
+                        {formatPrice(p.precio, p.operacion)}
+                      </p>
+                      <a
+                        href={whatsappHrefFor(p)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="whitespace-nowrap text-xs font-semibold text-navy underline decoration-navy/30 underline-offset-4 transition-colors hover:text-red-deep hover:decoration-red-deep"
+                      >
+                        Consultar →
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {visible < filtered.length && (
+                <div className="mt-8 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setVisible((v) => v + PAGE_SIZE)}
+                    className="rounded-sm border border-navy/30 px-7 py-3 text-sm font-semibold text-navy transition-colors hover:border-navy hover:bg-navy hover:text-cream"
+                  >
+                    Cargar más ({filtered.length - visible} restantes)
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );
