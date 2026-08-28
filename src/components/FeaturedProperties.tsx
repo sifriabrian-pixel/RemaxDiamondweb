@@ -19,7 +19,7 @@ export function FeaturedProperties() {
           className="max-w-xl"
         >
           <h2 className="font-display text-[clamp(1.9rem,3.6vw,2.8rem)] font-extrabold leading-[1.02] text-navy">
-            Catálogo verificado, sin relleno.
+            Conocé las mejores propiedades de <span className="text-red">la costa</span>.
           </h2>
           <p className="mt-4 text-navy/60">
             Una muestra real del inventario — 866 propiedades activas en total, filtrables

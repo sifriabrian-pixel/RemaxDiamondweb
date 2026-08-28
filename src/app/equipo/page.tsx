@@ -1,48 +1,57 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { agentCounts } from "@/lib/properties";
+import { broker, advisors } from "@/lib/team";
 
 export const metadata: Metadata = { title: "Equipo completo — RE/MAX Diamond" };
 
-// Nombres reales de agentes en el CSV del MLS (27/08/2026) — no todos tienen foto
-// pública todavía (esos 5 están destacados en el home). Esta página existe para
-// que "ver equipo completo" sea una promesa real, no un link decorativo.
 const RECRUIT_WHATSAPP_HREF =
   "https://wa.me/593985437529?text=" +
   encodeURIComponent("Hola, quiero información sobre sumarme como asesor de RE/MAX Diamond.");
 
 export default function FullTeamPage() {
-  const agents = agentCounts();
-
   return (
     <main className="min-h-screen bg-cream pb-24 pt-28">
-      <div className="mx-auto max-w-[900px] px-6 sm:px-10">
+      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
         <Link href="/#equipo" className="text-sm font-semibold text-navy/60 transition-colors hover:text-navy">
           ← Volver
         </Link>
 
         <h1 className="mt-6 font-display text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.02] text-navy">
-          Los {agents.length} asesores de RE/MAX Diamond
+          Los {advisors.length + 1} asesores de RE/MAX Diamond
         </h1>
         <p className="mt-3 max-w-[60ch] text-navy/60">
-          Ordenados por propiedades activas a cargo (MLS Redremax). Cinco tienen foto
-          pública en la home; el resto del equipo está acá, con nombre real y cantidad
-          real de propiedades.
+          Foto y nombre real de todo el equipo, con la cantidad de propiedades activas
+          a cargo de cada uno (MLS Redremax).
         </p>
 
-        <ol className="mt-10 divide-y divide-navy/10 border-y border-navy/10">
-          {agents.map((agent, i) => (
-            <li key={agent.name} className="flex items-center justify-between gap-4 py-3.5">
-              <span className="flex items-baseline gap-4">
-                <span className="w-6 shrink-0 font-display text-xs text-navy/35">{i + 1}</span>
-                <span className="font-medium text-navy">{agent.name}</span>
-              </span>
-              <span className="shrink-0 text-sm text-navy/55">
+        <div className="mt-12 flex flex-col items-start gap-6 border border-navy/12 bg-navy px-7 py-8 text-cream sm:flex-row sm:items-center sm:gap-8 sm:px-10">
+          <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full ring-2 ring-red-bridge">
+            <Image src={broker.photo} alt={broker.name} fill sizes="96px" className="object-cover" />
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-red">Broker</p>
+            <p className="mt-1 font-display text-2xl font-extrabold">{broker.name}</p>
+            <p className="mt-1 text-sm text-cream/60">{broker.listings} propiedades activas a cargo</p>
+          </div>
+        </div>
+
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {advisors.map((agent) => (
+            <div
+              key={agent.slug}
+              className="flex flex-col items-center gap-3 rounded-sm border border-navy/12 bg-white px-4 py-6 text-center"
+            >
+              <div className="relative h-20 w-20 overflow-hidden rounded-full bg-navy/10">
+                <Image src={agent.photo} alt={agent.name} fill sizes="80px" className="object-cover" />
+              </div>
+              <p className="font-display text-sm font-bold leading-snug text-navy">{agent.name}</p>
+              <p className="text-xs text-navy/60">
                 {agent.listings} {agent.listings === 1 ? "propiedad" : "propiedades"}
-              </span>
-            </li>
+              </p>
+            </div>
           ))}
-        </ol>
+        </div>
 
         <div className="mt-10 flex flex-col items-start gap-3 border-t border-navy/12 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-navy/70">

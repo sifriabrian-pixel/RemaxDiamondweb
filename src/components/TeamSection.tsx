@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { advisors as allAdvisors } from "@/lib/team";
 
 const WHATSAPP_HREF =
   "https://wa.me/593985437529?text=" +
@@ -95,7 +96,7 @@ export function TeamSection() {
             href="/equipo"
             className="text-sm font-semibold text-navy underline decoration-navy/30 underline-offset-4 transition-colors hover:text-red-deep hover:decoration-red-deep"
           >
-            +32 asesores más → Ver equipo completo
+            +{allAdvisors.length - AGENTS.length} asesores más → Ver equipo completo
           </Link>
         </div>
 

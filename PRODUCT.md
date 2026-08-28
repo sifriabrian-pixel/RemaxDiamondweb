@@ -99,6 +99,12 @@ Identidad visual 100% independiente del template genérico remax.com.ec y de cua
 - **`/propiedades/[slug]`**: ficha estática por cada una de las 100 propiedades (foto grande, precio, specs, agente, CTA WhatsApp). Ya no tiene campo de descripción larga (el dataset scrapeado no lo trae) — solo datos estructurados reales.
 - Home (`FeaturedProperties.tsx`) ahora toma las primeras 9 de este dataset en vez del set curado viejo.
 
+## Evidence on Hand (actualizado 2026-08-28 — equipo completo con foto real)
+
+- **Los 39 asesores + broker (40 personas) con foto real**: se descubrió que `remax.com.ec/diamond` tiene un botón "Ver todos" en la sección Equipo que expone foto pública de todo el roster, no solo de los 5 destacados en el home. `data/team-full.json` (generado por `scripts/build-team-full.mjs` desde `data/team-photos-raw.json`) trae foto + nombre + cantidad de propiedades activas (cruzado contra `data/properties.json`) para cada uno.
+- **`/equipo` reescrita** como grid de fotos circulares (antes era una lista de texto sin foto), pedido explícito del cliente: "tenes acceso a la foto de cada uno y nombre y apellido".
+- El contador "+N asesores más" del home ahora se calcula dinámicamente desde este dataset real en vez de tener el número hardcodeado (estaba desactualizado: decía 32, correspondía a 35).
+
 ## Product Principles
 
 1. Identidad propia, no template de franquicia ni de portal inmobiliario genérico — cada decisión visual se mide contra "¿esto podría ser cualquier otra inmobiliaria de LATAM?".
