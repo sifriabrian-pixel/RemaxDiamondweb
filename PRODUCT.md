@@ -105,6 +105,10 @@ Identidad visual 100% independiente del template genérico remax.com.ec y de cua
 - **`/equipo` reescrita** como grid de fotos circulares (antes era una lista de texto sin foto), pedido explícito del cliente: "tenes acceso a la foto de cada uno y nombre y apellido".
 - El contador "+N asesores más" del home ahora se calcula dinámicamente desde este dataset real en vez de tener el número hardcodeado (estaba desactualizado: decía 32, correspondía a 35).
 
+## Evidence on Hand (actualizado 2026-08-28 — video de reclutamiento)
+
+- **Sección dedicada a potenciales asesores con video** (`RecruitVideoSection.tsx`, entre Equipo y Zona en el home): embed de YouTube (`youtube-nocookie.com`, privacidad reforzada) de un video de marca RE/MAX sobre beneficios de ser asesor (`https://youtu.be/FpUAHag8E_c`, pasado por el cliente), con headline, copy breve y CTA de WhatsApp propio.
+
 ## Product Principles
 
 1. Identidad propia, no template de franquicia ni de portal inmobiliario genérico — cada decisión visual se mide contra "¿esto podría ser cualquier otra inmobiliaria de LATAM?".
